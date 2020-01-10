@@ -206,6 +206,9 @@ def addReplicationConfiguration(repoKey, cronExp) {
     replication.username = config.username
     replication.password = config.password
     replication.enableEventReplication = true
+    if (replication.metaClass.hasProperty("checkBinaryExistenceInFilestore")) {
+        replication.checkBinaryExistenceInFilestore = true
+    }
     def descriptor = ctx.centralConfig.mutableDescriptor
     descriptor.addLocalReplication(replication)
     ctx.centralConfig.saveEditedDescriptorAndReload(descriptor)
